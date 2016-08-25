@@ -1,4 +1,4 @@
-update=Sun 07 Aug 2016 10:35:04 AM PDT
+update=Thu 25 Aug 2016 11:40:59 AM PDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,13 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=/home/dhylands/Dropbox/kicad/a-3rd-libmod/Cer_reso
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
