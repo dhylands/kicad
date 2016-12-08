@@ -1,0 +1,83 @@
+- FlatCam needs filled poygons in order to do edge cuts properly.
+  Kicad doesn't create filled polygons.
+  So I created a script which converts lines into a filled polygon
+
+  fill-edge-cuts.py Nanino8-Edge.Cuts.gbr
+
+  This generates Nanino8-Edge.Cuts-filled.gbr
+
+- In pcbNew
+	- Set the grid origin (Place->Grid Origin) and click in bottom left of arduino board
+	- Set Drill and Place Offset (aka aux axis) to bottom left corner of board
+		- This sets the origin for the gerber/gcode files.
+	- When plotting gerbers, check "Use auxilliary axis as origin"
+	- When making drill files. Set Drill Origin to "Auxilliary axis"
+	- In gerber viewer, confirm origin location
+	- For http://dangerousprototypes.com/store/pcbs Check "Use Protel file extensions"
+	  and the rename-gerbers.py script.
+
+- python flatcam.py
+	- Import gerbers
+		Nanino8-B.Cu.gbr
+		Nanino8-Edge.Cuts-filled.gbr
+	- Import Excellon
+		Nanino8.drl
+		Nanino8-NPTH.drl
+
+	- Double click on Nanino8-Edge.Cuts-filled.gbr
+		- Board cutout only cuts out rectangular
+		- so we use isolation routing with a larger endmill
+			3.125 mm (1/8")
+		- generate geometry
+
+	- Add Tabs
+		- click on the "Projects" tab
+		- Click once on the Nanino8-B-Edge-Cuts-filled.gbr_iso geometry
+		- Edit->Edit-Geometry
+		- Click on rectangle and draw out tabs
+			- Click-Drag and then click again when done
+			- Want tabs about 2 endmill widths wide
+			- Press ESC (should highlight the Arrow)
+			- Click on the outline and Control-Click the tabs in that order
+			- Drawing->Cut-Path
+			- Press ESC
+			- Click on first tab and control-Click on the rest of the tabs
+			- Drawing->Delete Shape
+			- Edit->Update Geometry
+			- Should now have a path with some gaps in it
+	- Double click on Nanino8-B.Cu.gbr
+		- 0.48mm (0.019")
+		- generate geometry
+	- Double click on Nanino8-NPTH.drl
+		- Mill Holes - 3.125mm
+	- Double click on Nanino8.drl
+		- Can either drill or mill
+		- to mill pick a small mill (smaller than the smallest hole)
+			- generate geometry
+		- to drill 
+			- pick Cut Z -2mm
+			- Travel Z 3 mm
+			- Feed rate 75 mm/min
+	- Double click on Nanino8-NPTH.drl_mill
+		CutZ -2 mm
+		TravelZ 3 mm
+		Feed Rate 150 mm/min
+		Tool dia: 3.125mm
+		- Generate
+	- Double click on Nanino8-B.Cu.gbr_iso
+		CutX .15 mm
+		TravelZ 3 mm
+		Feed Rate: 380 mm/min
+		Tool Dia: 0.5 mm
+		- Generate
+	- Double click on Nanino8-B-Edge-Cuts-filled.gbr_iso
+		CutZ -2 mm
+		TravelZ 3 mm
+		Feed Rate 150 mm/min
+		Tool dia: 3.125mm
+		- Generate
+
+Not verified!
+Isolation feed rate 15 IPM = 380 mm/min
+Edge cut feed rate 6 IPM = 150 mm/min
+

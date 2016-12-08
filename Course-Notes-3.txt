@@ -1,0 +1,44 @@
+Tools required
+- soldering iron
+- solder (leaded is easier)
+- flux
+- flush cutters
+- Needle nose piers (or hemostats)
+
+
+- Solder R1 & R2 (1K - brown - black - red)
+- Solder R3 (10K - brown - black - orange)
+- If using a right-angle header for the serial port, solder that on now.
+- Solder C1, C3, and C4 (small blue or beige caps)
+- Drill out the 2 holes for the RESET switch with a #53 drill bit
+  - Solder the Reset Switch. Since we drilled out the hole there is a possibility
+    that the via was drilled out as well, you may need to solder the lead closest
+    to the ISP connector on the top side as well.
+- Solder the DIP socket. The notched side of the DIP socket goes towards the
+  reset switch. Solder one corner and the diagonally opposite corner. Make sure
+  that the socket is flush with the board. If it isn't remelt the solder on the
+  corner pins while pressing the socket. When it's flush, then solder the remaining
+  pins and re-solder the 2 corner pins.
+- Solder the RED LED in the PWR (D2) and the GREEN LED in LED (D1). The flat side
+  of the LED (the shorter of the 2 leads) goes in the square pad marked 'K'.
+- Solder the ceramic resonator (X1).
+- If desired, solder the ISP header on
+- If using a straight header for the serial port, solder it now
+- Solder the 100 uf Electrolytic cap (or the smaller 10 uF cap). The negative (shorted lead) goes in the
+  square pad. You may want to use the smaller cap if you're planning on using a shield
+  (just so that it doesn't bump into things).
+- If desired, solder 2 pin power headers into P8, P9 and/or the VCC/GND bus
+- If desired, solder the 2 single pin headers onto 3V3 and VIN
+- If desired, solder the I/O headers
+
+- Provide power to the board and verify that the RED LED turns on.
+- Remove power from the board.
+
+Plug in all six wires from the USB serial adpater into the serial connector.
+Note that RXI from the serial adpter plugs into TXO on the board, and
+TXO on the board plugs into RXI on serial adapter. So all six pins from the
+serial adapter plug in directly in the same order into the board.
+
+Gently bend the pins on the ATMega328 chip so that they're parallel and carefully
+plug it into the DIP socket. Apply power. The green LED should blink with what
+I call a heartbeat pattern (2 quick flashes per second).
